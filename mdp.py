@@ -223,14 +223,9 @@ class FeatureMDP(MDP):
 
 
 
-
-
-
-
 if __name__ =="__main__":
 
     '''Here's a simple example of how to use the FeatureMDP class'''
-
     
     #three features, red (-1), blue (+1), white (0)
     r = [1,0]
@@ -244,5 +239,3 @@ if __name__ =="__main__":
     noise = 0.0
     eps = 0.0001
     env = FeatureMDP(2,2,[0],feature_weights, state_features, gamma, noise)
-    
-   

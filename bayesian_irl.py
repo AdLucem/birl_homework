@@ -23,10 +23,7 @@ class BIRL:
         else:
             self.num_mcmc_dims = self.env.num_states
 
-        
-
     
-
     def calc_ll(self, hyp_reward):
         '''
             calculate the log-likelihood of the demonstrations given a reward hypothesis hyp_reward
@@ -48,7 +45,7 @@ class BIRL:
             # Note that q_values[s][a] will give you the Q-value of taking action a in state s
             # and q_values[s] will give you a vector of the Q-values for state s, one Q-value per action.
             ###################   
-            pass
+            log_sum += q_values[s][a]
         return log_sum
         
 

@@ -12,11 +12,6 @@ def value_iteration(env, epsilon=0.0001):
   :param epsilon: numerical precision for value function
   :return: vector representation of the value function for each state
   """
-    num_s = env.num_states
-    num_a = env.num_actions
-    V = np.zeros(num_s)  #vector to store Value function
-
-
     ############################
     ##TODO implement Value Iteration such that it terminates when within epsilon of the true Value function
     ## Implement Value Iteration basd on the Russell and Norvig Chapter on MDPs (page 653 in the 3rd Edition). 
@@ -28,7 +23,32 @@ def value_iteration(env, epsilon=0.0001):
     ## States are indexed 0 to env.num_states-1 and are numbered left to right, top to bottom.
     ## Finally, env.gamma gives you the discount factor.
     ############################
-    
+    num_s = env.num_states
+    num_a = env.num_actions
+    V = np.zeros(num_s)  #vector to store Value function
+    V_ = np.zeros(num_s)  #updated vector to store Value function
+
+    while True:
+        delta = 0
+        V = V_ 
+
+        for s in range(num_s):
+
+            # get max-over-actions transition reward
+            max_over_actions = 0
+            for a in range(num_a):
+                tmp = np.sum(np.multiply(env.transitions[s][a], V))
+                if tmp > max_over_actions:
+                    max_over_actions = tmp
+
+            V_[s] = env.rewards[s] + (env.gamma * max_over_actions)
+            if abs(V_[s] - V[s]) > delta:
+                delta = abs(V_[s] - V[s])
+
+        while_rhs = epsilon * ((1 - env.gamma) / env.gamma)
+        if (delta < while_rhs):
+            break
+
     return V
 
 
